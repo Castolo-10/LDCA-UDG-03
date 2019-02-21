@@ -8,7 +8,7 @@ renderer.setSize( window.innerWidth, window.innerHeight )
 // sets renderer background color
 renderer.setClearColor("#222222")
 document.body.appendChild( renderer.domElement )
-camera.position.z = 5
+camera.position.z = 6
 
 // resize canvas on resize window
 window.addEventListener( 'resize', () => {
@@ -20,15 +20,15 @@ window.addEventListener( 'resize', () => {
 })
 
 // basic cube
-var geometry = new THREE.BoxGeometry( 1, 1, 1)
-var material = new THREE.MeshStandardMaterial( { color: 0xff0051, flatShading: true, metalness: 0, roughness: 1 })
-var cube = new THREE.Mesh ( geometry, material )
-scene.add( cube )
+var geometry = new THREE.SphereGeometry( 1, 32, 32)
+var material = new THREE.MeshStandardMaterial( { color: 0x2eadf1, flatShading: true, metalness: 0, roughness: 100 })
+var sphere = new THREE.Mesh ( geometry, material )
+scene.add( sphere )
 
 // wireframe cube
-var geometry = new THREE.BoxGeometry( 3, 3, 3)
+var geometry = new THREE.SphereGeometry( 6, 30, 30)
 var material = new THREE.MeshBasicMaterial( {
-	color: "#dadada", wireframe: true, transparent: true
+	color: "#442ef2", wireframe: true, transparent: true
 })
 var wireframeCube = new THREE.Mesh ( geometry, material )
 scene.add( wireframeCube )
@@ -42,13 +42,37 @@ var pointLight = new THREE.PointLight( 0xffffff, 1 );
 pointLight.position.set( 25, 50, 25 );
 scene.add( pointLight );
 
+// Ring
+var geometry = new THREE.RingGeometry( 1.1, 1.4, 100 );
+var material = new THREE.MeshStandardMaterial( { color: 0xe9ff00, side: THREE.DoubleSide, flatShading: true, metalness: 0, roughness: 1 } );
+var ring = new THREE.Mesh( geometry, material );
+scene.add( ring );
+
+var geometry = new THREE.RingGeometry( 1.5, 1.8, 100 );
+var material = new THREE.MeshStandardMaterial( { color: 0x00ff37, side: THREE.DoubleSide, flatShading: true, metalness: 0, roughness: 1 } );
+var ring2 = new THREE.Mesh( geometry, material );
+scene.add( ring2 );
+
+
+var geometry = new THREE.RingGeometry( 1.9, 2.2, 100 );
+var material = new THREE.MeshStandardMaterial( { color: 0xff0000, side: THREE.DoubleSide, flatShading: true, metalness: 0, roughness: 1 } );
+var ring3 = new THREE.Mesh( geometry, material );
+scene.add( ring3 );
+
+var geometry = new THREE.RingGeometry( 2.3, 2.6, 100 );
+var material = new THREE.MeshStandardMaterial( { color: 0xff00d8, side: THREE.DoubleSide, flatShading: true, metalness: 0, roughness: 1 } );
+var ring4 = new THREE.Mesh( geometry, material );
+scene.add( ring4 );
 
 function animate() {
 	requestAnimationFrame( animate )
-	cube.rotation.x += 0.04;
-	cube.rotation.y += 0.04;
-	wireframeCube.rotation.x -= 0.01;
-	wireframeCube.rotation.y -= 0.01;
+  sphere.rotation.x += 0.01;
+  sphere.rotation.y += 0.01;
+  wireframeCube.rotation.y -= 0.01;
+  ring.rotation.x += 0.05;
+  ring2.rotation.y += 0.04;
+  ring3.rotation.x -= 0.03;
+  ring4.rotation.y -= 0.02;
 	renderer.render( scene, camera )
 }
 animate()
